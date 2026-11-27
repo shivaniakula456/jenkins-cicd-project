@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'YOUR_GITHUB_REPOSITORY_URL'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t my-web-app .'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh 'docker rm -f my-web-app || true'
+                sh 'docker run -d --name my-web-app -p 8081:80 my-web-app'
+            }
+        }
+    }
+}
