@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh 'docker rm -f my-web-app || true'
-                sh 'docker run -d --name my-web-app -p 8081:80 my-web-app'
+                sh 'docker run -d --name my-web-app -p 8082:80 my-web-app'
             }
         }
     }
